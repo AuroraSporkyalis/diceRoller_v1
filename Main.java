@@ -15,6 +15,8 @@ public class Main {
         
         int total;
 
+        System.out.println("Now it prints here!\n");
+
         switch(operation) {
             case 1: 
                 total = num1 + num2;
