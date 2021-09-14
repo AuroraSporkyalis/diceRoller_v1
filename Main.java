@@ -16,6 +16,7 @@ public class Main {
         int total;
 
         System.out.println("Now it prints here!\n");
+        System.out.println("Now it prints here too!\n");
 
         switch(operation) {
             case 1: 
