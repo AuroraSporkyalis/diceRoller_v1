@@ -1,49 +1,44 @@
+//import java.util.Scanner;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to CISP 401 Simple Calculator");
-        System.out.println("Please enter an integer:");
+        int total = 0;
         Scanner input = new Scanner(System.in);
-        int num1 = input.nextInt();
-        System.out.println("Please enter another integer:");
-        int num2 = input.nextInt();
-        System.out.println("You input " + num1  + " and "+ num2 + ".");
-        System.out.println("What do you want to do with those numbers? Enter 1=+, 2=-, 3=*, 4=/:");
-        int operation = input.nextInt();
+        String rollAgain;
+
+        int numOfDie = 0;
+        int dieSides = 0;
         
-        int total;
+        do {
+            System.out.println("Enter the number and type of die you wish to roll in XdY format. e.g 2d6.");
+            try {
+                String Str = input.next();
+                numOfDie = Integer.parseInt(Str.split("d")[0]);
+                dieSides = Integer.parseInt(Str.split("d")[1]);
+              } catch (Exception e) {
+                System.out.println("That is not valid input");
+              }
 
-        System.out.println("Now it prints here!\n");
-        System.out.println("Now it prints here too!\n");
+            int[] dice = new int[numOfDie];
 
-        switch(operation) {
-            case 1: 
-                total = num1 + num2;
-                System.out.println("The sum of your numbers is " + total);
-                break;
-            case 2:
-                total = num1 - num2;
-                System.out.println("The difference between your numbers is " + total);
-                break;
-            case 3:
-                total = num1 * num2;
-                System.out.println("The product of your numbers is " + total);
-                break;
-            case 4:
-                // check the divisor isn't 0
-                if (num2 != 0) {
-                    total = num1 / num2;
-                    System.out.println("The quotient your numbers is " + total);
-                }
-                else {
-                    System.out.println("Error, cannot divide by 0");
+            for(int i = 0; i < numOfDie; i++) {
+                Random rand = new Random();
+                dice[i] = rand.nextInt(dieSides) + 1;
+            }
+            for (int die: dice) {
+                System.out.println("You rolled a " + die + " on a " + dieSides + " sided die\n");
+                total += die;
+            }
+            System.out.println("You rolled a total of " + total + "\n");
 
-                }
-            default:
-                System.out.println("Invalid option."); 
+            System.out.println("Do you want to roll again? Plase enter y/n");
+            rollAgain = input.next();
         }
-
+        while(rollAgain.contains("y"));
+        
+        input.close();
     }
 }
